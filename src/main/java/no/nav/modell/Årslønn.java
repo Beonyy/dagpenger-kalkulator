@@ -1,4 +1,4 @@
-package no.nav.årslønn;
+package no.nav.modell;
 
 /**
  * Representeren en person sin lønn et kalenderår.

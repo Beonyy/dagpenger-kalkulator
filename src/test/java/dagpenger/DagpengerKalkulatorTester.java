@@ -1,7 +1,7 @@
 package dagpenger;
 
 import no.nav.dagpenger.DagpengerKalkulator;
-import no.nav.årslønn.Årslønn;
+import no.nav.modell.Årslønn;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

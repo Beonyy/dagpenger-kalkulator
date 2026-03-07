@@ -1,12 +1,14 @@
 package no.nav.dagpenger;
 
-import no.nav.grunnbeløp.GrunnbeløpVerktøy;
-import no.nav.årslønn.Årslønn;
+import no.nav.modell.Årslønn;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+//Skulle gjerne vært på engelsk :)
+//Metodene her kunne vært separert ut med tanke på separation of concerns,
+//men det blir mye arbeid
 
 /**
  * Kalkulator for å beregne hvor mye dagpenger en person har rett på i Norge basert på dagens grunnbeløp (1G).
@@ -14,8 +16,8 @@ import java.util.List;
  *      De siste 3 årene må gjennomsnitslønnen være høyere enn 3G.
  *      Tjent mer det siste året enn 1.5G.
  * Hvis en person har rett på dagpenger, må følgende ting vurderes for å kalkulere dagsatsen:
- *      Hva er størst av gjennomsnittlig årslønn de 3 siste årene og siste årslønn.
- *      Hvis siste årslønn er størst, er årslønnen høyere enn 6G.
+ *      Hva er størst av gjennomsnittlig modell de 3 siste årene og siste modell.
+ *      Hvis siste modell er størst, er årslønnen høyere enn 6G.
  * Antall årlige arbeidsdager i Norge er satt til å være 260, så ved beregning av dagsats må 260 dager
  * brukes og ikke 365.
  *
@@ -24,12 +26,11 @@ import java.util.List;
  */
 public class DagpengerKalkulator {
 
-    public final GrunnbeløpVerktøy grunnbeløpVerktøy;
-
-    public final List<Årslønn> årslønner;
+    public final DagpengerVerktøy dagpengeVerktøy;
+    private final List<Årslønn> årslønner;
 
     public DagpengerKalkulator() {
-        this.grunnbeløpVerktøy = new GrunnbeløpVerktøy();
+        this.dagpengeVerktøy = new DagpengerVerktøy();
         this.årslønner = new ArrayList<>();
     }
 
@@ -43,13 +44,13 @@ public class DagpengerKalkulator {
         double dagsats = 0;
 
         int arbeidsdagerIÅret = 260;
-        if (harRettigheterTilDagpenger() == true) {
+        if (harRettigheterTilDagpenger()) {
             if (velgBeregningsMetode() == "SISTE_ÅRSLØNN") {
                 dagsats = Math.ceil(hentÅrslønnVedIndeks(0).hentÅrslønn() / arbeidsdagerIÅret);
             } else if (velgBeregningsMetode() == "GJENNOMSNITTET_AV_TRE_ÅR") {
                 dagsats = Math.ceil((summerNyligeÅrslønner(3) / 3) / arbeidsdagerIÅret);
             } else if (velgBeregningsMetode() == "MAKS_ÅRLIG_DAGPENGERGRUNNLAG") {
-                dagsats = Math.ceil(grunnbeløpVerktøy.hentMaksÅrligDagpengegrunnlag() / arbeidsdagerIÅret);
+                dagsats = Math.ceil(dagpengeVerktøy.hentMaksÅrligDagpengegrunnlag() / arbeidsdagerIÅret);
             }
         }
 
@@ -63,9 +64,9 @@ public class DagpengerKalkulator {
     public boolean harRettigheterTilDagpenger() {
         boolean harRettigheter = false;
 
-        if (summerNyligeÅrslønner(3) >= grunnbeløpVerktøy.hentTotaltGrunnbeløpForGittAntallÅr(3)) {
+        if (summerNyligeÅrslønner(3) >= dagpengeVerktøy.hentTotaltGrunnbeløpForGittAntallÅr(3)) {
             harRettigheter = true;
-        } else if (hentÅrslønnVedIndeks(0).hentÅrslønn() >= grunnbeløpVerktøy.hentMinimumÅrslønnForRettPåDagpenger()) {
+        } else if (hentÅrslønnVedIndeks(0).hentÅrslønn() >= dagpengeVerktøy.hentMinimumÅrslønnForRettPåDagpenger()) {
             harRettigheter = true;
         }
 
@@ -81,7 +82,7 @@ public class DagpengerKalkulator {
 
         if (hentÅrslønnVedIndeks(0).hentÅrslønn() > (summerNyligeÅrslønner(3) / 3)) {
            beregningsMetode = "SISTE_ÅRSLØNN";
-           if (hentÅrslønnVedIndeks(0).hentÅrslønn() > grunnbeløpVerktøy.hentMaksÅrligDagpengegrunnlag()) {
+           if (hentÅrslønnVedIndeks(0).hentÅrslønn() > dagpengeVerktøy.hentMaksÅrligDagpengegrunnlag()) {
                beregningsMetode = "MAKS_ÅRLIG_DAGPENGERGRUNNLAG";
            }
         } else {
@@ -91,6 +92,10 @@ public class DagpengerKalkulator {
         return beregningsMetode;
     }
 
+    /**
+     * Legger til modell-objekt i listen over årslønner og sorterer basert på årstall
+     * @param årslønn Objekt med årstall og sum av inntekt
+     */
     public void leggTilÅrslønn(Årslønn årslønn) {
         this.årslønner.add(årslønn);
         this.sorterÅrslønnerBasertPåNyesteÅrslønn();
@@ -98,8 +103,8 @@ public class DagpengerKalkulator {
 
     /**
      * Henter årslønnen i registeret basert på dens posisjon i registeret ved gitt indeks.
-     * @param indeks posisjonen til årslønnen.
-     * @return årslønnen ved gitt indeks.
+     * @param indeks Posisjonen til årslønnen.
+     * @return Årslønnen ved gitt indeks.
      */
     public Årslønn hentÅrslønnVedIndeks(int indeks) {
         return this.årslønner.get(indeks);
@@ -107,8 +112,8 @@ public class DagpengerKalkulator {
 
     /**
      * Summemer sammen antall årslønner basert på gitt parameter.
-     * @param antallÅrÅSummere antall år med årslønner vi vil summere.
-     * @return summen av årslønner.
+     * @param antallÅrÅSummere Antall år med årslønner vi vil summere.
+     * @return Summen av årslønner.
      */
     public double summerNyligeÅrslønner(int antallÅrÅSummere) {
         double sumAvNyligeÅrslønner = 0;

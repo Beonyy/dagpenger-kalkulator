@@ -1,4 +1,4 @@
-package no.nav.grunnbeløp;
+package no.nav.data;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.json.JSONObject;
