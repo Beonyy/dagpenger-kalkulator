@@ -10,34 +10,40 @@ import java.util.Random;
 /// Spinner opp noe eksempeldata å teste på.
 public class TilfeldigDataProdusent {
 
-    public static ArrayList<DagpengerSøknad> genererSøknadsArkiv() {
-        SøknadsArkiv søknadsArkiv = new SøknadsArkiv();
-        ArrayList<DagpengerSøknad> listeOverSøknader = søknadsArkiv.hentListeOverSøknader();
-        Random random = new Random();
+
+    public static SøknadsArkiv genererSøknadsArkiv() {
+        //SøknadsArkiv søknadsArkiv = new SøknadsArkiv();
+        //ArrayList<DagpengerSøknad> listeOverSøknader = søknadsArkiv.hentAlleSøknader();
+
+        ArrayList<DagpengerSøknad> listeOverSøknader = new ArrayList<>();
+        Random tilfeldig = new Random();
+        int inneværendeÅr = LocalDate.now().getYear();
         int maksLønn = 450000;
         int minimumsLønn = 0;
-        int maksÅrstall = LocalDate.now().getYear() - 1;
-        int minimumsÅrstall = LocalDate.now().getYear() - 3;
+        int år, lønn;
 
-        Random tilfeldig = new Random();
-        int år;
-        int lønn;
         for (int i = 0; i < 101; i++) {
             ArrayList<Årslønn> årslønner = new ArrayList<Årslønn>();
-            for (int j = 0; j < 4; j++) {
-                if (tilfeldig.nextInt(5) == 0) {
+            for (int j = 1; j <= 3; j++) {
+                år = inneværendeÅr - j;
+                int femtedelsSjanse = tilfeldig.nextInt(5);
+
+                if (femtedelsSjanse == 0) {
                     lønn = 0;
-                } else {
+                } else if (femtedelsSjanse == 4) {
+                    lønn = 1000000;
+                }
+                else {
                     lønn = tilfeldig.nextInt(maksLønn - minimumsLønn + 1) + minimumsLønn;
                 }
-                år = tilfeldig.nextInt(maksÅrstall - minimumsÅrstall + 1) + minimumsÅrstall;
+
                 Årslønn årslønn = new Årslønn(år, lønn);
                 årslønner.add(årslønn);
             }
             DagpengerSøknad dagpengerSøknad = new DagpengerSøknad(årslønner);
             listeOverSøknader.add(dagpengerSøknad);
         }
-        return listeOverSøknader;
+        return new SøknadsArkiv(listeOverSøknader);
     }
 }
 

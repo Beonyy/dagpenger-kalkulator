@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-//Skulle gjerne vært på engelsk :)
+
 //Metodene her kunne vært separert ut med tanke på separation of concerns,
-//men det blir mye arbeid
+// behandlingen av årslønn kan tenkes å være nyttig også andre steder
 
 /**
  * Kalkulator for å beregne hvor mye dagpenger en person har rett på i Norge basert på dagens grunnbeløp (1G).
@@ -74,7 +74,7 @@ public class DagpengerKalkulator {
     }
 
     /**
-     * Velger hva som skal være beregnings metode for dagsats ut ifra en person sine årslønner.
+     * Velger hva som skal være beregningsmetode for dagsats ut ifra en person sine årslønner.
      * @return beregnings metode for dagsats.
      */
     public String velgBeregningsMetode() {

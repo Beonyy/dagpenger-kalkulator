@@ -5,9 +5,13 @@ import no.nav.modell.DagpengerSøknad;
 import java.util.ArrayList;
 
 public class SøknadsArkiv {
-    private ArrayList<DagpengerSøknad> listeOverSøknader = new ArrayList<>();
+    private final ArrayList<DagpengerSøknad> listeOverSøknader;
 
-    public ArrayList<DagpengerSøknad> hentListeOverSøknader() {
+    public SøknadsArkiv(ArrayList<DagpengerSøknad> listeOverSøknader) {
+        this.listeOverSøknader = listeOverSøknader;
+    }
+
+    public ArrayList<DagpengerSøknad> hentAlleSøknader() {
         return this.listeOverSøknader;
     }
 }
