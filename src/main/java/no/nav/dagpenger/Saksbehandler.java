@@ -23,7 +23,7 @@ public class Saksbehandler {
     public ArrayList<DagpengerSøknad> hentSøknaderForGjennomgang() {
         ArrayList<DagpengerSøknad> søknaderForGjennomgang = new ArrayList<>();
         for (DagpengerSøknad søknad : this.søknadsArkiv.hentAlleSøknader()) {
-            if (søknad.hentSøknadsstatus() == this.spesialisering) {
+            if (søknad.hentMidlertidigSøknadsstatus() == this.spesialisering) {
                 søknaderForGjennomgang.add(søknad);
             }
         }

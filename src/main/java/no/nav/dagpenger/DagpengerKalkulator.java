@@ -26,6 +26,8 @@ import java.util.List;
  */
 public class DagpengerKalkulator {
 
+    private static final int ARBEIDSDAGER_I_ÅRET = 260;
+
     public final DagpengerVerktøy dagpengeVerktøy;
     private final List<Årslønn> årslønner;
 
@@ -43,14 +45,13 @@ public class DagpengerKalkulator {
     public double kalkulerDagsats() {
         double dagsats = 0;
 
-        int arbeidsdagerIÅret = 260;
         if (harRettigheterTilDagpenger()) {
             if (velgBeregningsMetode() == "SISTE_ÅRSLØNN") {
-                dagsats = Math.ceil(hentÅrslønnVedIndeks(0).hentÅrslønn() / arbeidsdagerIÅret);
+                dagsats = Math.ceil(hentÅrslønnVedIndeks(0).hentÅrslønn() / ARBEIDSDAGER_I_ÅRET);
             } else if (velgBeregningsMetode() == "GJENNOMSNITTET_AV_TRE_ÅR") {
-                dagsats = Math.ceil((summerNyligeÅrslønner(3) / 3) / arbeidsdagerIÅret);
+                dagsats = Math.ceil((summerNyligeÅrslønner(3) / 3) / ARBEIDSDAGER_I_ÅRET);
             } else if (velgBeregningsMetode() == "MAKS_ÅRLIG_DAGPENGERGRUNNLAG") {
-                dagsats = Math.ceil(dagpengeVerktøy.hentMaksÅrligDagpengegrunnlag() / arbeidsdagerIÅret);
+                dagsats = Math.ceil(dagpengeVerktøy.hentMaksÅrligDagpengegrunnlag() / ARBEIDSDAGER_I_ÅRET);
             }
         }
 
@@ -75,7 +76,7 @@ public class DagpengerKalkulator {
 
     /**
      * Velger hva som skal være beregningsmetode for dagsats ut ifra en person sine årslønner.
-     * @return beregnings metode for dagsats.
+     * @return beregningsmetode for dagsats.
      */
     public String velgBeregningsMetode() {
         String beregningsMetode;

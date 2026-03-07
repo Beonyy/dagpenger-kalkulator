@@ -28,7 +28,7 @@ public class Main {
         //Søknadsarkivet vil oppdatere datakilden til begge saksbehandlerne.
         SøknadsArkiv søknadsArkiv = TilfeldigDataProdusent.genererSøknadsArkiv();
         AutomatiskSaksbehandler automatiskSaksbehandler = new AutomatiskSaksbehandler(søknadsArkiv);
-        Saksbehandler saksbehandler = new Saksbehandler(Status.InnvilgetMedMaksSats, søknadsArkiv);
+        Saksbehandler saksbehandler = new Saksbehandler(Status.INNVILGET_MED_MAKS_SATS, søknadsArkiv);
 
         System.out.println(saksbehandler.hentSpesialisering());
         automatiskSaksbehandler.prosesserDagpengerSøknader();

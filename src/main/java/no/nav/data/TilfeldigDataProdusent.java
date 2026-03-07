@@ -7,7 +7,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 
-/// Spinner opp noe eksempeldata å teste på.
+/**
+ * Er illustrerende kilde til data, som vil genereres omtrent tilfeldig,
+ *  forsøkt å passe antatt data systemet vil måtte håndtere. Se regelsett fra
+ *  DagpengeKalkulator.
+ * Det er lagt inn en 1/5 sjanse for årsinntekt på 0, og 1/5 sjanse for
+ *  årsinntekt på 1 000 000.
+ * Legger kun inn data for de 3 siste fullførte årene.
+ */
 public class TilfeldigDataProdusent {
 
 
