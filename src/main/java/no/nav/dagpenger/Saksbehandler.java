@@ -27,16 +27,18 @@ public class Saksbehandler {
     }
 
     /**
-     * Ser gjennom alle søknader i angitt {@link SøknadsArkiv}, henter ut de som samsvarer
-     *  med denne Saksbehandlerens {@link #spesialisering}.
-     * @return liste over forhåndsbehandlede søknader som faller innenfor
-     *  saksbehandlerens spesialitet.
+     * TODO: vurdere output-formatet her. Hensiktsmessig å lage en toString? Bedre å la frontend gjøre som de vil?
+     * Ser gjennom alle søknader i angitt {@link SøknadsArkiv}, henter ut de søknadene som samsvarer
+     *  med denne Saksbehandlerens {@link #spesialisering} og som ikke er ferdigstilte.
+     * @return liste over forhåndsbehandlede søknader som faller innenfor saksbehandlerens spesialitet.
      */
     public ArrayList<DagpengerSøknad> hentSøknaderForGjennomgang() {
         ArrayList<DagpengerSøknad> søknaderForGjennomgang = new ArrayList<>();
 
         for (DagpengerSøknad søknad : this.søknadsArkiv.hentAlleSøknader()) {
-            if (søknad.hentMidlertidigSøknadsstatus() == this.spesialisering) {
+
+            //filtrerer ut de som ikke tilhører spesialiteten eller allerede har en endelig søknadsstatus
+            if (søknad.hentMidlertidigSøknadsstatus() == this.spesialisering && søknad.hentSøknadsstatus() == null) {
                 søknaderForGjennomgang.add(søknad);
             }
         }

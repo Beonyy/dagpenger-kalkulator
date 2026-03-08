@@ -23,7 +23,7 @@ public class AutomatiskSaksbehandler {
      * Endringene skjer i objektene i {@link SøknadsArkiv}et som ble gitt
      *  ved objektopprettelse.
      * */
-    public void prosesserDagpengerSøknader() {
+    public void forhåndsbehandleDagpengerSøknader() {
         for (DagpengerSøknad dagpengerSøknad : this.søknadsArkiv.hentAlleSøknader()) {
 
             //For fremtidige tilfeller hvor ny data potenielt hentes inn i samme søknadsArkiv.

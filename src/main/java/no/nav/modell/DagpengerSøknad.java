@@ -1,5 +1,6 @@
 package no.nav.modell;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -36,6 +37,31 @@ public class DagpengerSøknad {
 
     public Status hentSøknadsstatus() {
         return this.endeligSøknadsstatus;
+    }
+
+    /**
+     * Gjør det mulig å få en enkel visuell oversikt, erstatter rådatabehandling
+     * @return Tekst med all informasjon relevant til dagpengesøknadsbehandling
+     */
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder("Foreløpig søknadsstatus er: " + this.hentMidlertidigSøknadsstatus() +
+                "\nBasert på disse årslønningene:\n");
+
+        for (Årslønn årslønn : this.årslønner) {
+            if (årslønn.hentÅretForLønn() < LocalDate.now().getYear() &&
+                    årslønn.hentÅretForLønn() > LocalDate.now().getYear() - 4) {
+
+                string.append(årslønn.hentÅretForLønn() + ": " + årslønn.hentÅrslønn() + "\n");
+            }
+        }
+        if (this.hentSøknadsstatus() != null) {
+            string.append("Søknaden er allerede ferdigstilt, med resultatet " + this.hentSøknadsstatus());
+        } else {
+            string.append("Søknaden trenger ferdigstilling.");
+        }
+
+        return string.toString();
     }
 
     /**
