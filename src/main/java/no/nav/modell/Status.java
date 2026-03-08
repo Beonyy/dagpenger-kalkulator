@@ -1,6 +1,6 @@
 package no.nav.modell;
 
-import no.nav.dagpenger.Saksbehandler;
+import no.nav.kontroller.Saksbehandler;
 
 /**
  * Representerer de mulige utfallene for en {@link DagpengerSøknad},

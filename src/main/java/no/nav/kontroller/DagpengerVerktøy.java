@@ -1,4 +1,4 @@
-package no.nav.dagpenger;
+package no.nav.kontroller;
 
 import no.nav.data.GrunnbeløpAPI;
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class DagpengerVerktøy {
     }
 
     /**
-     * Kalkulerer hvor mye en person må tjene det siste året for å ha rett på dagpenger.
+     * Kalkulerer hvor mye en person må tjene det siste året for å ha rett på kontroller.
      * @return 1.5G basert på dagens grunnbeløp.
      */
     public double hentMinimumÅrslønnForRettPåDagpenger() {

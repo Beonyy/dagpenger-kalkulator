@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Holder på all informasjon om en søknad som er nødvendig for saksbehandling.
  *  {@link #midlertidigSøknadsstatus} holder på en midlertidig vurdering, brukes for
- *  å tilgangsstyre hvilke(n) {@link no.nav.dagpenger.Saksbehandler} som skal ha
+ *  å tilgangsstyre hvilke(n) {@link no.nav.kontroller.Saksbehandler} som skal ha
  *  tilgang til en gitt søknad. Saksbehandleren setter manuelt en {@link #endeligSøknadsstatus},
  *  som lagrer det endelige resultatet.
  */
@@ -35,7 +35,7 @@ public class DagpengerSøknad {
         this.midlertidigSøknadsstatus = søknadsstatus;
     }
 
-    public Status hentSøknadsstatus() {
+    public Status hentEndeligSøknadsstatus() {
         return this.endeligSøknadsstatus;
     }
 
@@ -55,8 +55,8 @@ public class DagpengerSøknad {
                 string.append(årslønn.hentÅretForLønn() + ": " + årslønn.hentÅrslønn() + "\n");
             }
         }
-        if (this.hentSøknadsstatus() != null) {
-            string.append("Søknaden er allerede ferdigstilt, med resultatet " + this.hentSøknadsstatus());
+        if (this.hentEndeligSøknadsstatus() != null) {
+            string.append("Søknaden er allerede ferdigstilt, med resultatet " + this.hentEndeligSøknadsstatus());
         } else {
             string.append("Søknaden trenger ferdigstilling.");
         }

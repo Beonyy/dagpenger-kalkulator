@@ -1,4 +1,4 @@
-package no.nav.dagpenger;
+package no.nav.kontroller;
 
 import no.nav.modell.Årslønn;
 
@@ -11,11 +11,11 @@ import java.util.List;
 // behandlingen av årslønn kan tenkes å være nyttig også andre steder
 
 /**
- * Kalkulator for å beregne hvor mye dagpenger en person har rett på i Norge basert på dagens grunnbeløp (1G).
- * For at en person skal ha rett på dagpenger, må en av de to følgene kravene være møtt:
+ * Kalkulator for å beregne hvor mye kontroller en person har rett på i Norge basert på dagens grunnbeløp (1G).
+ * For at en person skal ha rett på kontroller, må en av de to følgene kravene være møtt:
  *      De siste 3 årene må gjennomsnitslønnen være høyere enn 3G.
  *      Tjent mer det siste året enn 1.5G.
- * Hvis en person har rett på dagpenger, må følgende ting vurderes for å kalkulere dagsatsen:
+ * Hvis en person har rett på kontroller, må følgende ting vurderes for å kalkulere dagsatsen:
  *      Hva er størst av gjennomsnittlig modell de 3 siste årene og siste modell.
  *      Hvis siste modell er størst, er årslønnen høyere enn 6G.
  * Antall årlige arbeidsdager i Norge er satt til å være 260, så ved beregning av dagsats må 260 dager
@@ -39,9 +39,9 @@ public class DagpengerKalkulator {
     }
 
     /**
-     * Hvis en person har rett på dagpenger, vil den kalkulere dagsatsen en person har rett på.
-     * Hvis ikke en person har rett på dagpenger, vil metoden returnere 0kr som dagsats, som en antagelse på at det
-     * er det samme som å ikke ha rett på dagpenger.
+     * Hvis en person har rett på kontroller, vil den kalkulere dagsatsen en person har rett på.
+     * Hvis ikke en person har rett på kontroller, vil metoden returnere 0kr som dagsats, som en antagelse på at det
+     * er det samme som å ikke ha rett på kontroller.
      * @return dagsatsen en person har rett på.
      */
     public double kalkulerDagsats() {
@@ -61,8 +61,8 @@ public class DagpengerKalkulator {
     }
 
     /**
-     * Sjekker om en person har rettighet til dagpenger eller ikke.
-     * @return om personen har rett på dagpenger.
+     * Sjekker om en person har rettighet til kontroller eller ikke.
+     * @return om personen har rett på kontroller.
      */
     public boolean harRettigheterTilDagpenger() {
         boolean harRettigheter = false;

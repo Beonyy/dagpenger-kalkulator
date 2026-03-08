@@ -1,2 +1,2 @@
-rootProject.name = "dagpenger-kalkulator"
+rootProject.name = "kontroller-kalkulator"
 

@@ -1,4 +1,4 @@
-package no.nav.dagpenger;
+package no.nav.kontroller;
 
 import no.nav.data.SøknadsArkiv;
 import no.nav.modell.DagpengerSøknad;
@@ -27,7 +27,7 @@ public class AutomatiskSaksbehandler {
         for (DagpengerSøknad dagpengerSøknad : this.søknadsArkiv.hentAlleSøknader()) {
 
             //For fremtidige tilfeller hvor ny data potenielt hentes inn i samme søknadsArkiv.
-            if (dagpengerSøknad.hentSøknadsstatus() != null) {
+            if (dagpengerSøknad.hentEndeligSøknadsstatus() != null) {
                 continue;
             }
 

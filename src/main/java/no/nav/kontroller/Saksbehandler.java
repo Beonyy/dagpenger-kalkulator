@@ -1,4 +1,4 @@
-package no.nav.dagpenger;
+package no.nav.kontroller;
 
 import no.nav.data.SøknadsArkiv;
 import no.nav.modell.DagpengerSøknad;
@@ -38,7 +38,7 @@ public class Saksbehandler {
         for (DagpengerSøknad søknad : this.søknadsArkiv.hentAlleSøknader()) {
 
             //filtrerer ut de som ikke tilhører spesialiteten eller allerede har en endelig søknadsstatus
-            if (søknad.hentMidlertidigSøknadsstatus() == this.spesialisering && søknad.hentSøknadsstatus() == null) {
+            if (søknad.hentMidlertidigSøknadsstatus() == this.spesialisering && søknad.hentEndeligSøknadsstatus() == null) {
                 søknaderForGjennomgang.add(søknad);
             }
         }

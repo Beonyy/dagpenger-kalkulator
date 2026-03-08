@@ -14,7 +14,7 @@ public class TilfeldigDataProdusent {
 
     /**
      *Inneholder justeringer i "tilfeldigheten" for å tvinge frem tilfeller av alternativene i {@link no.nav.modell.Status}.
-     * Se regelsett fra {@link no.nav.dagpenger.DagpengerKalkulator}.
+     * Se regelsett fra {@link no.nav.kontroller.DagpengerKalkulator}.
      * Det er lagt inn en 20% sjanse for årsinntekt på 0 for hvert år, 20% sjanse for årsinntekt på 1 000 000
      * for hvert år, og de resterende tilfellene får et tilfeldig tall for lønn mellom 0 og 450 000.
      * <b>MERK: </b>Legger kun inn data for de 3 siste fullførte årene.

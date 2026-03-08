@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 /**
  * En midlertidig beholder for data, uavhengig av kilde.
- * Brukes og oppdateres av både {@link no.nav.dagpenger.AutomatiskSaksbehandler}
- *  og {@link no.nav.dagpenger.Saksbehandler}.
+ * Brukes og oppdateres av både {@link no.nav.kontroller.AutomatiskSaksbehandler}
+ *  og {@link no.nav.kontroller.Saksbehandler}.
  */
 public class SøknadsArkiv {
     //TODO: Opprette to lister: "behandlede" og "ubehandlede" søknader,

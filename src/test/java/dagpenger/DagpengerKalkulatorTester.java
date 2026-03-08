@@ -1,6 +1,6 @@
 package dagpenger;
 
-import no.nav.dagpenger.DagpengerKalkulator;
+import no.nav.kontroller.DagpengerKalkulator;
 import no.nav.modell.Årslønn;
 import org.junit.jupiter.api.Test;
 
