@@ -5,6 +5,11 @@ import no.nav.modell.DagpengerSøknad;
 import no.nav.modell.Status;
 import no.nav.modell.Årslønn;
 
+/**
+ * TODO: Finne bedre klassenavn?
+ *Foretar de(n) automatiserte prosessene en søknad kan gå gjennom før de behandles
+ *  av en menneskelig saksbehandler.
+ */
 public class AutomatiskSaksbehandler {
     private final SøknadsArkiv søknadsArkiv;
 
@@ -13,13 +18,15 @@ public class AutomatiskSaksbehandler {
     }
 
     /**
-     * Vurderer søknadene i arkivet mot reglene i kalkulatoren automatisk
-     * @return Søknadsarkiv med anbefalt søknadsutfall lagt til i hver ubehandlede søknad
+     * Vurderer søknadene i arkivet mot reglene i kalkulatoren,
+     *  et av tre mulige utfall registreres som en midlertidig vurdering for hver søknad.
+     * Endringene skjer i objektene i {@link SøknadsArkiv}et som ble gitt
+     *  ved objektopprettelse.
      * */
-    public SøknadsArkiv prosesserDagpengerSøknader() {
+    public void prosesserDagpengerSøknader() {
         for (DagpengerSøknad dagpengerSøknad : this.søknadsArkiv.hentAlleSøknader()) {
 
-            //Unngår at ferdigstilte søknader behandles på nytt
+            //For fremtidige tilfeller hvor ny data potenielt hentes inn i samme søknadsArkiv.
             if (dagpengerSøknad.hentSøknadsstatus() != null) {
                 continue;
             }
@@ -40,6 +47,5 @@ public class AutomatiskSaksbehandler {
                 dagpengerSøknad.settMidlertidigSøknadsstatus(Status.AVSLAG_FOR_LAV_INNTEKT);
             }
         }
-        return this.søknadsArkiv;
     }
 }

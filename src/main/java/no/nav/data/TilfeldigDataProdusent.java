@@ -8,19 +8,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Er illustrerende kilde til data, som vil genereres omtrent tilfeldig,
- *  forsøkt å passe antatt data systemet vil måtte håndtere. Se regelsett fra
- *  DagpengeKalkulator.
- * Det er lagt inn en 1/5 sjanse for årsinntekt på 0, og 1/5 sjanse for
- *  årsinntekt på 1 000 000.
- * Legger kun inn data for de 3 siste fullførte årene.
+ *Er illustrerende kilde til data, som vil genereres omtrent tilfeldig.
  */
 public class TilfeldigDataProdusent {
 
-
+    /**
+     *Inneholder justeringer i "tilfeldigheten" for å tvinge frem tilfeller av alternativene i {@link no.nav.modell.Status}.
+     * Se regelsett fra {@link no.nav.dagpenger.DagpengerKalkulator}.
+     * Det er lagt inn en 20% sjanse for årsinntekt på 0 for hvert år, 20% sjanse for årsinntekt på 1 000 000
+     * for hvert år, og de resterende tilfellene får et tilfeldig tall for lønn mellom 0 og 450 000.
+     * <b>MERK: </b>Legger kun inn data for de 3 siste fullførte årene.
+     * @return Et nytt {@link SøknadsArkiv} med generert testdata.
+     */
+    //Kan ved behov lage en override som tar en eksisterende liste som argument,
+    //og legger til nye ubehandlede søknader.
     public static SøknadsArkiv genererSøknadsArkiv() {
-        //SøknadsArkiv søknadsArkiv = new SøknadsArkiv();
-        //ArrayList<DagpengerSøknad> listeOverSøknader = søknadsArkiv.hentAlleSøknader();
 
         ArrayList<DagpengerSøknad> listeOverSøknader = new ArrayList<>();
         Random tilfeldig = new Random();
@@ -29,7 +31,7 @@ public class TilfeldigDataProdusent {
         int minimumsLønn = 0;
         int år, lønn;
 
-        for (int i = 0; i < 101; i++) {
+        for (int i = 0; i < 100; i++) {
             ArrayList<Årslønn> årslønner = new ArrayList<Årslønn>();
             for (int j = 1; j <= 3; j++) {
                 år = inneværendeÅr - j;

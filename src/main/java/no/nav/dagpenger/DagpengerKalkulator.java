@@ -26,9 +26,11 @@ import java.util.List;
  */
 public class DagpengerKalkulator {
 
+    //Muliggjør bruk av samme konstante informasjon på tvers av metoder, samt gir
+    // tydeligere indikasjon på hvor den er og kan endres.
     private static final int ARBEIDSDAGER_I_ÅRET = 260;
 
-    public final DagpengerVerktøy dagpengeVerktøy;
+    private final DagpengerVerktøy dagpengeVerktøy;
     private final List<Årslønn> årslønner;
 
     public DagpengerKalkulator() {

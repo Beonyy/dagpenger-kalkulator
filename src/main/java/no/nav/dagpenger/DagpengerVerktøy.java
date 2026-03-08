@@ -1,7 +1,6 @@
 package no.nav.dagpenger;
 
 import no.nav.data.GrunnbeløpAPI;
-
 import java.io.IOException;
 
 /**
@@ -21,6 +20,10 @@ public class DagpengerVerktøy {
     public DagpengerVerktøy() {
         antallGForMinimumsrett = 1.5;
         antallGForMakssats = 6;
+
+        //Usikker på om det er lurt å la verktøyet fortsette dersom det ikke får hentet
+        // grunnpengerbeløpet? Skulle kanskje stoppet programmet istedenfor, eller tvinge
+        // implementasjonen mot frontend til å behandle det?
         try {
             this.grunnbeløp = new GrunnbeløpAPI().hentGrunnbeløp();
         } catch (IOException | InterruptedException exception) {
@@ -28,10 +31,9 @@ public class DagpengerVerktøy {
         }
     }
 
-    //Jeg lekte med tanken å lage en konstruktør
-    // som lar deg sette disse verdiene manuelt,
+    //Jeg lekte med tanken å lage en konstruktør som lar deg sette disse verdiene manuelt,
     // men slike endringer skjer antakelig sjeldent..
-    //Og det vil heller skape enkel mulighet for feilsituasjoner
+    // Og det vil heller skape enkel mulighet for feilsituasjoner.
     /*
     public DagpengeVerktøy(double antallGForMinimumsrett, double antallGForMakssats) {
         this.antallGForMinimumsrett = antallGForMinimumsrett;

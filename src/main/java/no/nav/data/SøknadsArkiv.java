@@ -4,6 +4,11 @@ import no.nav.modell.DagpengerSøknad;
 
 import java.util.ArrayList;
 
+/**
+ * En midlertidig beholder for data, uavhengig av kilde.
+ * Brukes og oppdateres av både {@link no.nav.dagpenger.AutomatiskSaksbehandler}
+ *  og {@link no.nav.dagpenger.Saksbehandler}.
+ */
 public class SøknadsArkiv {
     //TODO: Opprette to lister: "behandlede" og "ubehandlede" søknader,
     // saksbehandlerens metode for vurdering flytter også fra en til den andre,
@@ -12,7 +17,7 @@ public class SøknadsArkiv {
     private final ArrayList<DagpengerSøknad> listeOverSøknader;
 
     public SøknadsArkiv(ArrayList<DagpengerSøknad> listeOverSøknader) {
-        this.listeOverSøknader = new ArrayList<>();
+        this.listeOverSøknader = listeOverSøknader;
     }
 
     public ArrayList<DagpengerSøknad> hentAlleSøknader() {

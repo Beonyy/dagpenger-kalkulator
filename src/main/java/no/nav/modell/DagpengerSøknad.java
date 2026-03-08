@@ -2,7 +2,18 @@ package no.nav.modell;
 
 import java.util.ArrayList;
 
+/**
+ * Holder på all informasjon om en søknad som er nødvendig for saksbehandling.
+ *  {@link #midlertidigSøknadsstatus} holder på en midlertidig vurdering, brukes for
+ *  å tilgangsstyre hvilke(n) {@link no.nav.dagpenger.Saksbehandler} som skal ha
+ *  tilgang til en gitt søknad. Saksbehandleren setter manuelt en {@link #endeligSøknadsstatus},
+ *  som lagrer det endelige resultatet.
+ */
 public class DagpengerSøknad {
+    /*
+    TODO:årslønner holder ukritisk på listen over årslønner den får servert,
+     bør benytte verktøy (fra DagpengerKalkulator) til å sikre dette.
+    */
     private ArrayList<Årslønn> årslønner;
     private Status endeligSøknadsstatus;
     private Status midlertidigSøknadsstatus;
@@ -27,6 +38,9 @@ public class DagpengerSøknad {
         return this.endeligSøknadsstatus;
     }
 
+    /**
+     * Setter det endelige resultatet av søknadsvurderingen.
+     */
     public void ferdigstillSøknad(Status søknadsstatus) {
         this.endeligSøknadsstatus = søknadsstatus;
     }
